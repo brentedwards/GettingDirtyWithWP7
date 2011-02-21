@@ -8,7 +8,8 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:custom="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
 	xmlns:mvvm="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP7"
-	xmlns:GettingDirty_Core_Converters="clr-namespace:GettingDirty.Core.Converters;assembly=GettingDirty.Core" 
+	xmlns:GettingDirty_Core_Converters="clr-namespace:GettingDirty.Core.Converters;assembly=GettingDirty.Core"
+	xmlns:multi="clr-namespace:GettingDirty.Core.Converters.Multi;assembly=GettingDirty.Core"
 	x:Class="GettingDirty.Phone.MainPage"
 	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
 	SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
@@ -26,7 +27,20 @@
 					<ColumnDefinition Width="Auto"/>
 				</Grid.ColumnDefinitions>
 				<CheckBox d:LayoutOverrides="Width, Height" IsChecked="{Binding IsCompleted, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Left">
-					<TextBlock Margin="0,0,1,0" TextWrapping="Wrap" Text="{Binding Title}" VerticalAlignment="Center" d:LayoutOverrides="Width" Grid.Column="1" HorizontalAlignment="Left" FontStyle="{Binding IsCompleted, Converter={StaticResource BoolToFontStyleConverter}}" Foreground="{Binding ., Converter={StaticResource TaskColorConverter}, Mode=OneWay}"/>
+					<TextBlock Margin="0,0,1,0" TextWrapping="Wrap" Text="{Binding Title}" VerticalAlignment="Center" d:LayoutOverrides="Width" Grid.Column="1" HorizontalAlignment="Left" FontStyle="{Binding IsCompleted, Converter={StaticResource BoolToFontStyleConverter}}">
+						<multi:BindingUtil.MultiBindings>
+							<multi:MultiBindings>
+								<multi:MultiBinding TargetProperty="Foreground" Converter="{StaticResource TaskColorConverter}">
+									<multi:MultiBinding.Bindings>
+										<multi:BindingCollection>
+											<Binding Path="IsCompleted"/>                            
+											<Binding Path="DueDate"/>
+										</multi:BindingCollection>
+									</multi:MultiBinding.Bindings>
+								</multi:MultiBinding>
+							</multi:MultiBindings>
+						</multi:BindingUtil.MultiBindings>
+					</TextBlock>
 				</CheckBox>
 				<Rectangle Fill="{Binding Priority, Converter={StaticResource PriorityToBrushConverter}}" Margin="0" Grid.Column="1" Width="50" Height="50" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 				<Rectangle Grid.ColumnSpan="2" Margin="52,0,0,0" StrokeThickness="2" Visibility="{Binding IsCompleted, Converter={StaticResource VisibilityConverter}}" Fill="#FF797979" Height="4"/>

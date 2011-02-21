@@ -9,38 +9,41 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Data;
-using GettingDirty.Core.Models;
+using GettingDirty.Core.Converters.Multi;
 
 namespace GettingDirty.Core.Converters
 {
-	public class TaskToBrushConverter : IValueConverter
+	public class TaskToBrushConverter : IMultiValueConverter
 	{
 		public Brush NormalBrush { get; set; }
 		public Brush CompletedBrush { get; set; }
 		public Brush OverdueBrush { get; set; }
 
-		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+		public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
 		{
 			var result = NormalBrush;
 
-			var taskItem = value as TaskItem;
-			if (taskItem != null)
+			if (values.Length == 2)
 			{
-				if (taskItem.DueDate < DateTime.Now)
+				var dueDate = values[1] as DateTime?;
+				if (values[0] is bool && dueDate != null)
 				{
-					result = OverdueBrush;
-				}
+					if (dueDate.HasValue && dueDate.Value < DateTime.Now)
+					{
+						result = OverdueBrush;
+					}
 
-				if (taskItem.IsCompleted)
-				{
-					result = CompletedBrush;
+					if ((bool)values[0])
+					{
+						result = CompletedBrush;
+					}
 				}
 			}
 
 			return result;
 		}
 
-		public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+		public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
 		{
 			throw new NotImplementedException();
 		}
