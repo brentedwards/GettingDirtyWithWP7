@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GettingDirty.Core", "GettingDirty.Core\GettingDirty.Core.csproj", "{9254532D-2FD1-464C-911B-3995A2FC3B02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GettingDirty.Phone", "GettingDirty.Phone\GettingDirty.Phone.csproj", "{99965174-A5DD-4003-BBE0-E8840C75A985}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4F8F46D3-D626-43CC-9909-1B205F3D9B4A}"
+	ProjectSection(SolutionItems) = preProject
+		GettingDirty.vsmdi = GettingDirty.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GettingDirty.Core.Tests", "GettingDirty.Core.Tests\GettingDirty.Core.Tests.csproj", "{D5966730-CB56-42D0-A8F1-5A3EFCFE0F56}"
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = GettingDirty.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9254532D-2FD1-464C-911B-3995A2FC3B02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9254532D-2FD1-464C-911B-3995A2FC3B02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9254532D-2FD1-464C-911B-3995A2FC3B02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9254532D-2FD1-464C-911B-3995A2FC3B02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99965174-A5DD-4003-BBE0-E8840C75A985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99965174-A5DD-4003-BBE0-E8840C75A985}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99965174-A5DD-4003-BBE0-E8840C75A985}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{99965174-A5DD-4003-BBE0-E8840C75A985}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99965174-A5DD-4003-BBE0-E8840C75A985}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99965174-A5DD-4003-BBE0-E8840C75A985}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D5966730-CB56-42D0-A8F1-5A3EFCFE0F56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5966730-CB56-42D0-A8F1-5A3EFCFE0F56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5966730-CB56-42D0-A8F1-5A3EFCFE0F56}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D5966730-CB56-42D0-A8F1-5A3EFCFE0F56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5966730-CB56-42D0-A8F1-5A3EFCFE0F56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5966730-CB56-42D0-A8F1-5A3EFCFE0F56}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
