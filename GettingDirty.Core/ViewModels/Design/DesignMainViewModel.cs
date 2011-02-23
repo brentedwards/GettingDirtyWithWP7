@@ -48,6 +48,8 @@ namespace GettingDirty.Core.ViewModels.Design
 
 		public DesignMainViewModel()
 		{
+			NewTaskPriority = Priority.Medium;
+
 			var tasks = new ObservableCollection<TaskItem>();
 			tasks.Add(
 				new TaskItem()
