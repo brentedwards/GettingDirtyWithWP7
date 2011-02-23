@@ -15,6 +15,7 @@
 	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
 	SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
 	shell:SystemTray.IsVisible="True"
+	x:Name="Root"
 	>
 	<view:CorePhoneApplicationPage.Resources>
 		<GettingDirty_Core_Converters:PriorityToBrushConverter x:Key="PriorityToBrushConverter" LowBrush="White" MediumBrush="LightGreen" HighBrush="Green"/>
@@ -28,6 +29,17 @@
 					<ColumnDefinition Width="Auto"/>
 				</Grid.ColumnDefinitions>
 				<CheckBox d:LayoutOverrides="Width, Height" IsChecked="{Binding IsCompleted, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Left">
+					<toolkit:ContextMenuService.ContextMenu>
+						<toolkit:ContextMenu>
+							<toolkit:MenuItem Header="Edit Task Item">
+								<custom:Interaction.Triggers>
+									<custom:EventTrigger EventName="Click">
+										<mvvm:EventToCommand Command="{Binding Path=DataContext.EditTaskCommand, ElementName=Root}" CommandParameter="{Binding}" />
+									</custom:EventTrigger>
+								</custom:Interaction.Triggers>
+							</toolkit:MenuItem>
+						</toolkit:ContextMenu>
+					</toolkit:ContextMenuService.ContextMenu>
 					<TextBlock Margin="0,0,1,0" TextWrapping="Wrap" Text="{Binding Title}" VerticalAlignment="Center" d:LayoutOverrides="Width" Grid.Column="1" HorizontalAlignment="Left" FontStyle="{Binding IsCompleted, Converter={StaticResource BoolToFontStyleConverter}}">
 						<multi:BindingUtil.MultiBindings>
 							<multi:MultiBindings>
