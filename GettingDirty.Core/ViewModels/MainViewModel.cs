@@ -11,7 +11,7 @@ namespace GettingDirty.Core.ViewModels
 	{
 		private ITaskRepository TaskRepository { get; set; }
 
-		public RelayCommand ExecutionModelCommand { get; private set; }
+		public RelayCommand AddTaskCommand { get; private set; }
 
 		public string ApplicationTitle
 		{
@@ -37,17 +37,52 @@ namespace GettingDirty.Core.ViewModels
 			}
 		}
 
+		private string _newTaskTitle;
+		public string NewTaskTitle
+		{
+			get { return _newTaskTitle; }
+			set
+			{
+				_newTaskTitle = value;
+				NotifyPropertyChanged("NewTaskTitle");
+			}
+		}
+
+		private Priority _newTaskPriority;
+		public Priority NewTaskPriority
+		{
+			get { return _newTaskPriority; }
+			set
+			{
+				_newTaskPriority = value;
+				NotifyPropertyChanged("NewTaskPriority");
+			}
+		}
+
+		public Priority[] Priorities
+		{
+			get
+			{
+				return new Priority[] { Priority.High, Priority.Medium, Priority.Low };
+			}
+		}
+
 
 		public MainViewModel(ITaskRepository taskRepository)
 		{
 			TaskRepository = taskRepository;
 
-			ExecutionModelCommand = new RelayCommand(ShowExecutionModel);
+			AddTaskCommand = new RelayCommand(AddTask);
 		}
 
-		public void ShowExecutionModel()
+		public void AddTask()
 		{
-			SendNavigationRequestMessage(new Uri("/Views/ExecutionModelView.xaml", UriKind.Relative));
+			Tasks.Add(new TaskItem() { Title = NewTaskTitle, Priority = NewTaskPriority });
 		}
+
+		//public void ShowExecutionModel()
+		//{
+		//    SendNavigationRequestMessage(new Uri("/Views/ExecutionModelView.xaml", UriKind.Relative));
+		//}
 	}
 }

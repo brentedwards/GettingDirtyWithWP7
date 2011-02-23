@@ -17,7 +17,7 @@ namespace GettingDirty.Core.ViewModels.Design
 {
 	public class DesignMainViewModel : IMainViewModel
 	{
-		public RelayCommand ExecutionModelCommand
+		public RelayCommand AddTaskCommand
 		{
 			get { return null; }
 		}
@@ -33,6 +33,18 @@ namespace GettingDirty.Core.ViewModels.Design
 		}
 
 		public ObservableCollection<TaskItem> Tasks { get; private set; }
+
+		public string NewTaskTitle { get; set; }
+
+		public Priority NewTaskPriority { get; set; }
+
+		public Priority[] Priorities
+		{
+			get
+			{
+				return new Priority[] { Priority.High, Priority.Medium, Priority.Low };
+			}
+		}
 
 		public DesignMainViewModel()
 		{
