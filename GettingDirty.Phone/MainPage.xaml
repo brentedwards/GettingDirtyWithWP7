@@ -18,7 +18,7 @@
 	>
 	<view:CorePhoneApplicationPage.Resources>
 		<GettingDirty_Core_Converters:PriorityToBrushConverter x:Key="PriorityToBrushConverter" LowBrush="White" MediumBrush="LightGreen" HighBrush="Green"/>
-		<GettingDirty_Core_Converters:TaskToBrushConverter x:Key="TaskColorConverter" NormalBrush="{StaticResource PhoneForegroundBrush}" CompletedBrush="{StaticResource PhoneDisabledBrush}" OverdueBrush="{StaticResource PhoneAccentBrush}" />
+		<GettingDirty_Core_Converters:TaskToBrushConverter x:Key="TaskToBrushConverter" NormalBrush="{StaticResource PhoneForegroundBrush}" CompletedBrush="{StaticResource PhoneDisabledBrush}" OverdueBrush="{StaticResource PhoneAccentBrush}" />
 		<GettingDirty_Core_Converters:BoolToFontStyleConverter x:Key="BoolToFontStyleConverter" CompletedStyle="Italic"/>
 		<GettingDirty_Core_Converters:BoolToVisibilityConverter x:Key="VisibilityConverter"/>
 		<DataTemplate x:Key="TaskItemTemplate">
@@ -31,7 +31,7 @@
 					<TextBlock Margin="0,0,1,0" TextWrapping="Wrap" Text="{Binding Title}" VerticalAlignment="Center" d:LayoutOverrides="Width" Grid.Column="1" HorizontalAlignment="Left" FontStyle="{Binding IsCompleted, Converter={StaticResource BoolToFontStyleConverter}}">
 						<multi:BindingUtil.MultiBindings>
 							<multi:MultiBindings>
-								<multi:MultiBinding TargetProperty="Foreground" Converter="{StaticResource TaskColorConverter}">
+								<multi:MultiBinding TargetProperty="Foreground" Converter="{StaticResource TaskToBrushConverter}">
 									<multi:MultiBinding.Bindings>
 										<multi:BindingCollection>
 											<Binding Path="IsCompleted"/>                            

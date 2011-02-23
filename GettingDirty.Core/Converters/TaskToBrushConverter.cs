@@ -25,10 +25,10 @@ namespace GettingDirty.Core.Converters
 
 			if (values.Length == 2)
 			{
-				var dueDate = values[1] as DateTime?;
-				if (values[0] is bool && dueDate != null)
+				if (values[0] is bool)
 				{
-					if (dueDate.HasValue && dueDate.Value < DateTime.Now)
+					var dueDate = values[1] as DateTime?;
+					if (dueDate != null && dueDate.HasValue && dueDate.Value < DateTime.Now)
 					{
 						result = OverdueBrush;
 					}
