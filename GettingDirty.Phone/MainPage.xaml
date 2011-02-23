@@ -160,7 +160,7 @@
 				<Button Content="+" VerticalAlignment="Bottom" Margin="0,0,0,3" d:LayoutOverrides="Height" Grid.Column="2">
 					<custom:Interaction.Triggers>
 						<custom:EventTrigger EventName="Click">
-							<mvvm:EventToCommand Command="{Binding ExecutionModelCommand}" />
+							<mvvm:EventToCommand Command="{Binding AddTaskCommand}" />
 						</custom:EventTrigger>
 					</custom:Interaction.Triggers>
 				</Button>

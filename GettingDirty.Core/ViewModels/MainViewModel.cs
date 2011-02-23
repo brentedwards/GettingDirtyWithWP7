@@ -73,11 +73,21 @@ namespace GettingDirty.Core.ViewModels
 			TaskRepository = taskRepository;
 
 			AddTaskCommand = new RelayCommand(AddTask);
+
+			ResetNewTask();
 		}
 
 		public void AddTask()
 		{
 			Tasks.Add(new TaskItem() { Title = NewTaskTitle, Priority = NewTaskPriority });
+
+			ResetNewTask();
+		}
+
+		private void ResetNewTask()
+		{
+			NewTaskTitle = String.Empty;
+			NewTaskPriority = Priority.Medium;
 		}
 
 		//public void ShowExecutionModel()

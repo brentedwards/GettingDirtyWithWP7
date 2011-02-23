@@ -12,14 +12,14 @@ namespace GettingDirty.Core.ViewModels
 			{
 				if (_mainViewModel == null)
 				{
-					//if (IsInDesignMode)
+					if (IsInDesignMode)
 					{
 						_mainViewModel = new DesignMainViewModel();
 					}
-					/*else
+					else
 					{
 						_mainViewModel = Ioc.Container.Resolve<MainViewModel>();
-					}*/
+					}
 				}
 				return _mainViewModel;
 			}
