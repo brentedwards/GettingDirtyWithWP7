@@ -18,10 +18,30 @@ namespace GettingDirty.Core.ViewModels
 					}
 					else
 					{
-						_mainViewModel = Ioc.Container.Resolve<MainViewModel>();
+						_mainViewModel = Ioc.Container.Resolve<IMainViewModel>();
 					}
 				}
 				return _mainViewModel;
+			}
+		}
+
+		private IDetailsViewModel _detailsViewModel;
+		public IDetailsViewModel DetailsViewModel
+		{
+			get
+			{
+				if (_detailsViewModel == null)
+				{
+					if (IsInDesignMode)
+					{
+						_detailsViewModel = new DesignDetailsViewModel();
+					}
+					else
+					{
+						_detailsViewModel = Ioc.Container.Resolve<IDetailsViewModel>();
+					}
+				}
+				return _detailsViewModel;
 			}
 		}
 

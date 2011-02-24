@@ -20,6 +20,8 @@ namespace GettingDirty.Core.Models
 
 	public class TaskItem : ModelBase
 	{
+		public Guid TaskId { get; set; }
+
 		private String _title;
 		public String Title
 		{

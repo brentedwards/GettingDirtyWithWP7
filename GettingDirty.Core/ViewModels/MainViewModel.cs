@@ -81,14 +81,14 @@ namespace GettingDirty.Core.ViewModels
 
 		public void AddTask()
 		{
-			Tasks.Add(new TaskItem() { Title = NewTaskTitle, Priority = NewTaskPriority });
+			Tasks.Add(new TaskItem() { TaskId = Guid.NewGuid(), Title = NewTaskTitle, Priority = NewTaskPriority });
 
 			ResetNewTask();
 		}
 
 		public void EditTask(TaskItem taskItem)
 		{
-			//    SendNavigationRequestMessage(new Uri("/Views/ExecutionModelView.xaml", UriKind.Relative));
+			SendNavigationRequestMessage(new Uri(string.Format("/Views/DetailsView.xaml?taskId={0}", taskItem.TaskId), UriKind.Relative));
 		}
 
 		private void ResetNewTask()
