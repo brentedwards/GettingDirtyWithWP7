@@ -69,5 +69,13 @@ namespace GettingDirty.Phone.Views
 		{
 			NavigationService.GoBack();
 		}
+
+		private void DatePicker_ValueChanged(object sender, DateTimeValueChangedEventArgs e)
+		{
+			if (ViewModel != null)
+			{
+				ViewModel.TaskItem.DueDate = e.NewDateTime;
+			}
+		}
 	}
 }

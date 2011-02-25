@@ -25,11 +25,16 @@
 				<Rectangle Stroke="Black" Width="40" Height="40" Grid.Column="1" Fill="{Binding ., Converter={StaticResource PriorityToBrushConverter}}"/>
 			</Grid>
 		</DataTemplate>
+		<DataTemplate x:Key="DueTimeHeaderTemplate">
+			<Grid>
+				<TextBlock Margin="-10,0,1,0" TextWrapping="Wrap" Text="Due Date" d:LayoutOverrides="Width, Height" Foreground="White"/>
+			</Grid>
+		</DataTemplate>
 	</view:CorePhoneApplicationPage.Resources>
 
 	<phone:PhoneApplicationPage.ApplicationBar>
 		<shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-			<shell:ApplicationBarIconButton IconUri="/icons/appbar.save.rest.png" Text="Done" Click="Done_Click"/>
+			<shell:ApplicationBarIconButton IconUri="/icons/appbar.save.rest.png" Text="Save" Click="Done_Click"/>
 			<shell:ApplicationBarIconButton IconUri="/icons/appbar.cancel.rest.png" Text="Cancel" Click="Cancel_Click"/>
 		</shell:ApplicationBar>
 	</phone:PhoneApplicationPage.ApplicationBar>
@@ -69,10 +74,12 @@
 					</TextBox>
 					<TextBlock TextWrapping="Wrap" Text="Priority"/>
 					<toolkit:ListPicker Margin="8,0" ItemTemplate="{StaticResource PriorityTemplate}" ItemsSource="{Binding Priorities}" SelectedItem="{Binding TaskItem.Priority}"/>
-					<toolkit:DatePicker Value="{Binding TaskItem.DueDate}" Header="Due Date"/>
+					<toolkit:DatePicker Value="{Binding TaskItem.DueDate}" Header="Due Date" ValueChanged="DatePicker_ValueChanged" HeaderTemplate="{StaticResource DueTimeHeaderTemplate}"/>
+					<TextBlock TextWrapping="Wrap" Text="Due Time"/>
+					<toolkit:TimePicker Value="{Binding TaskItem.DueDate}" ValueChanged="DatePicker_ValueChanged"/>
 					<CheckBox Content="Completed" IsChecked="{Binding TaskItem.IsCompleted, Mode=TwoWay}"/>
 					<TextBlock TextWrapping="Wrap"><Run Text="Description"/><LineBreak/><Run/></TextBlock>
-					<TextBox TextWrapping="Wrap" Text="{Binding TaskItem.Description, Mode=TwoWay, UpdateSourceTrigger=Explicit}">
+					<TextBox TextWrapping="Wrap" Text="{Binding TaskItem.Description, UpdateSourceTrigger=Explicit}">
 						<interactivity:Interaction.Behaviors>
 							<behaviors:UpdateSourceOnTextChangedBehavior />
 						</interactivity:Interaction.Behaviors>
