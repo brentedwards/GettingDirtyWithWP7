@@ -15,38 +15,10 @@ using GettingDirty.Core.Models;
 
 namespace GettingDirty.Core.ViewModels.Design
 {
-	public class DesignMainViewModel : IMainViewModel
+	public class DesignMainViewModel : MainViewModel
 	{
-		public RelayCommand AddTaskCommand
-		{
-			get { return null; }
-		}
-
-		public string ApplicationTitle
-		{
-			get { return "Getting Dirty with WP7"; }
-		}
-
-		public string PageName
-		{
-			get { return "Tasks"; }
-		}
-
-		public ObservableCollection<TaskItem> Tasks { get; private set; }
-
-		public string NewTaskTitle { get; set; }
-
-		public Priority NewTaskPriority { get; set; }
-
-		public Priority[] Priorities
-		{
-			get
-			{
-				return new Priority[] { Priority.High, Priority.Medium, Priority.Low };
-			}
-		}
-
 		public DesignMainViewModel()
+			: base(null)
 		{
 			NewTaskPriority = Priority.Medium;
 
@@ -97,7 +69,7 @@ namespace GettingDirty.Core.ViewModels.Design
 				{
 					CreatedDate = DateTime.Now.AddDays(-3),
 					DueDate = DateTime.Now.AddDays(-1),
-					Title = "Overdue Task with a really long name that should wrap to the next line if I've done things correctly",
+					Title = "Overdue Task",
 					Priority = Priority.Low,
 					Description = "Overdue Task"
 				});

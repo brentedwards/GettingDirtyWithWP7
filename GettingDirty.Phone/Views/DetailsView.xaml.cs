@@ -16,9 +16,13 @@ namespace GettingDirty.Phone.Views
 {
 	public partial class DetailsView : CorePhoneApplicationPage
 	{
+		private IDetailsViewModel ViewModel { get; set; }
+
 		public DetailsView()
 		{
 			InitializeComponent();
+
+			ViewModel = DataContext as IDetailsViewModel;
 		}
 
 		protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -29,12 +33,41 @@ namespace GettingDirty.Phone.Views
 			{
 				var taskId = new Guid(NavigationContext.QueryString["taskId"]);
 
-				var viewModel = DataContext as IDetailsViewModel;
-				if (viewModel != null)
-				{
-					viewModel.Load(taskId);
-				}
+				ViewModel.Load(taskId);
 			}
+			else
+			{
+				ViewModel.NewTask();
+			}
+		}
+
+		protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+		{
+			base.OnBackKeyPress(e);
+
+			var result = MessageBox.Show("You will lose your changes.", "Are you sure?", MessageBoxButton.OKCancel);
+			switch (result)
+			{
+				case MessageBoxResult.OK:
+					NavigationService.GoBack();
+					break;
+
+				case MessageBoxResult.Cancel:
+					e.Cancel = true;
+					break;
+			}
+		}
+
+		private void Done_Click(object sender, EventArgs e)
+		{
+			ViewModel.Save();
+
+			NavigationService.GoBack();
+		}
+
+		private void Cancel_Click(object sender, EventArgs e)
+		{
+			NavigationService.GoBack();
 		}
 	}
 }

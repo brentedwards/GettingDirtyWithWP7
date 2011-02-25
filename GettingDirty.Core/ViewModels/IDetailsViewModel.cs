@@ -9,9 +9,12 @@ namespace GettingDirty.Core.ViewModels
 	public interface IDetailsViewModel
 	{
 		TaskItem TaskItem { get; }
+		Priority[] Priorities { get; }
 
 		string ApplicationTitle { get; }
 
 		void Load(Guid taskId);
+		void Save();
+		void NewTask();
 	}
 }

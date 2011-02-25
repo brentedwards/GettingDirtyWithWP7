@@ -66,7 +66,7 @@ namespace GettingDirty.Core.Models
 			}
 		}
 
-		private Priority _priority;
+		private Priority _priority = Priority.Medium;
 		public Priority Priority
 		{
 			get { return _priority; }

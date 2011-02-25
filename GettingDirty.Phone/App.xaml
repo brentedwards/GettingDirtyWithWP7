@@ -1,16 +1,18 @@
-﻿<Application 
-	x:Class="GettingDirty.Phone.App"
+﻿<Application
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-	mc:Ignorable="d"
 	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
 	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-	xmlns:vm="clr-namespace:GettingDirty.Core.ViewModels;assembly=GettingDirty.Core">
+	xmlns:vm="clr-namespace:GettingDirty.Core.ViewModels;assembly=GettingDirty.Core" xmlns:GettingDirty_Core_Converters="clr-namespace:GettingDirty.Core.Converters;assembly=GettingDirty.Core" 
+	x:Class="GettingDirty.Phone.App"
+	mc:Ignorable="d"
+	>
 
 	<!--Application Resources-->
 	<Application.Resources>
+		<GettingDirty_Core_Converters:PriorityToBrushConverter x:Key="PriorityToBrushConverter" LowBrush="White" MediumBrush="LightGreen" HighBrush="Green"/>
 		<vm:ViewModelLocator x:Key="Locator"
 							 d:IsDataSource="True" />
 	</Application.Resources>

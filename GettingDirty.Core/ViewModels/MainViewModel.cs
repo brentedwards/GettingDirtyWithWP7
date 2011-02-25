@@ -7,12 +7,13 @@ using GettingDirty.Core.Repositories;
 
 namespace GettingDirty.Core.ViewModels
 {
-	public sealed class MainViewModel : ViewModelBase, IMainViewModel
+	public class MainViewModel : ViewModelBase, IMainViewModel
 	{
 		private ITaskRepository TaskRepository { get; set; }
 
 		public RelayCommand AddTaskCommand { get; private set; }
 		public RelayCommand<TaskItem> EditTaskCommand { get; private set; }
+		public RelayCommand<TaskItem> DeleteTaskCommand { get; private set; }
 
 		public string ApplicationTitle
 		{
@@ -31,11 +32,12 @@ namespace GettingDirty.Core.ViewModels
 			{
 				if (_tasks == null)
 				{
-					_tasks = TaskRepository.LoadTasks();
+					Tasks = TaskRepository.LoadTasks();
 				}
 
 				return _tasks;
 			}
+			protected set { _tasks = value; }
 		}
 
 		private string _newTaskTitle;
@@ -75,6 +77,7 @@ namespace GettingDirty.Core.ViewModels
 
 			AddTaskCommand = new RelayCommand(AddTask);
 			EditTaskCommand = new RelayCommand<TaskItem>(EditTask);
+			DeleteTaskCommand = new RelayCommand<TaskItem>(DeleteTask);
 
 			ResetNewTask();
 		}
@@ -91,8 +94,24 @@ namespace GettingDirty.Core.ViewModels
 			SendNavigationRequestMessage(new Uri(string.Format("/Views/DetailsView.xaml?taskId={0}", taskItem.TaskId), UriKind.Relative));
 		}
 
-		private void ResetNewTask()
+		public void DeleteTask(TaskItem taskItem)
 		{
+			Tasks.Remove(taskItem);
+		}
+
+		public void LoadTasks()
+		{
+			_tasks = null;
+			NotifyPropertyChanged("Tasks");
+		}
+
+		public void SaveTasks()
+		{
+			TaskRepository.SaveTasks(Tasks);
+		}
+
+		private void ResetNewTask()
+		{	
 			NewTaskTitle = String.Empty;
 			NewTaskPriority = Priority.Medium;
 		}

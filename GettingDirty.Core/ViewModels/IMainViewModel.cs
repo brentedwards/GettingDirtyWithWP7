@@ -22,5 +22,8 @@ namespace GettingDirty.Core.ViewModels
 		Priority[] Priorities { get; }
 
 		ObservableCollection<TaskItem> Tasks { get; }
+
+		void SaveTasks();
+		void LoadTasks();
 	}
 }

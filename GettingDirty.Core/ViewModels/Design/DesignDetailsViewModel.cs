@@ -12,32 +12,19 @@ using GettingDirty.Core.Models;
 
 namespace GettingDirty.Core.ViewModels.Design
 {
-	public class DesignDetailsViewModel : IDetailsViewModel
+	public class DesignDetailsViewModel : DetailsViewModel
 	{
-		public string ApplicationTitle
+		public DesignDetailsViewModel()
+			: base(null)
 		{
-			get { return "Getting Dirty with WP7"; }
-		}
-
-		public TaskItem TaskItem
-		{
-			get
+			TaskItem = new TaskItem()
 			{
-				return new TaskItem()
-				{
-					Title = "Sample Task",
-					Description = "Description of the Sample Task",
-					CreatedDate = DateTime.Now,
-					DueDate = DateTime.Now.AddDays(1),
-					Priority = Priority.Medium
-				};
-			}
-		}
-
-
-		public void Load(Guid taskId)
-		{
-			throw new NotImplementedException();
+				Title = "Sample Task",
+				Description = "Description of the Sample Task",
+				CreatedDate = DateTime.Now,
+				DueDate = DateTime.Now.AddDays(1),
+				Priority = Priority.Medium
+			};
 		}
 	}
 }

@@ -24,7 +24,7 @@ namespace GettingDirty.Core.ViewModels
 			get { return "Getting Dirty with WP7"; }
 		}
 
-		private TaskItem _taskItem;
+		private TaskItem _taskItem = new TaskItem();
 		public TaskItem TaskItem
 		{
 			get { return _taskItem; }
@@ -32,6 +32,14 @@ namespace GettingDirty.Core.ViewModels
 			{
 				_taskItem = value;
 				NotifyPropertyChanged("TaskItem");
+			}
+		}
+
+		public Priority[] Priorities
+		{
+			get
+			{
+				return new Priority[] { Priority.High, Priority.Medium, Priority.Low };
 			}
 		}
 
@@ -57,6 +65,17 @@ namespace GettingDirty.Core.ViewModels
 		public void Load(Guid taskId)
 		{
 			TaskItem = Tasks.Where(t => t.TaskId == taskId).FirstOrDefault();
+		}
+
+		public void NewTask()
+		{
+			TaskItem = new TaskItem();
+			Tasks.Add(TaskItem);
+		}
+
+		public void Save()
+		{
+			TaskRepository.SaveTasks(Tasks);
 		}
 	}
 }
