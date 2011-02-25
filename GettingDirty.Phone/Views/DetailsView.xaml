@@ -6,7 +6,10 @@
 	xmlns:view="clr-namespace:GettingDirty.Phone.Views"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:GettingDirty_Core_Converters="clr-namespace:GettingDirty.Core.Converters;assembly=GettingDirty.Core" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+	xmlns:GettingDirty_Core_Converters="clr-namespace:GettingDirty.Core.Converters;assembly=GettingDirty.Core"
+	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+	xmlns:interactivity="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+	xmlns:behaviors="clr-namespace:GettingDirty.Core.Behaviors;assembly=GettingDirty.Core"
 	x:Class="GettingDirty.Phone.Views.DetailsView"
 	SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
 	mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
@@ -59,13 +62,21 @@
 			<ScrollViewer>
 				<StackPanel>
 					<TextBlock TextWrapping="Wrap" Text="Title"/>
-					<TextBox TextWrapping="Wrap" Text="{Binding TaskItem.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+					<TextBox TextWrapping="Wrap" Text="{Binding TaskItem.Title, Mode=TwoWay, UpdateSourceTrigger=Explicit}">
+						<interactivity:Interaction.Behaviors>
+							<behaviors:UpdateSourceOnTextChangedBehavior />
+						</interactivity:Interaction.Behaviors>
+					</TextBox>
 					<TextBlock TextWrapping="Wrap" Text="Priority"/>
 					<toolkit:ListPicker Margin="8,0" ItemTemplate="{StaticResource PriorityTemplate}" ItemsSource="{Binding Priorities}" SelectedItem="{Binding TaskItem.Priority}"/>
 					<toolkit:DatePicker Value="{Binding TaskItem.DueDate}" Header="Due Date"/>
 					<CheckBox Content="Completed" IsChecked="{Binding TaskItem.IsCompleted, Mode=TwoWay}"/>
 					<TextBlock TextWrapping="Wrap"><Run Text="Description"/><LineBreak/><Run/></TextBlock>
-					<TextBox TextWrapping="Wrap" Text="{Binding TaskItem.Description, Mode=TwoWay}"/>
+					<TextBox TextWrapping="Wrap" Text="{Binding TaskItem.Description, Mode=TwoWay, UpdateSourceTrigger=Explicit}">
+						<interactivity:Interaction.Behaviors>
+							<behaviors:UpdateSourceOnTextChangedBehavior />
+						</interactivity:Interaction.Behaviors>
+					</TextBox>
 				</StackPanel>
 			</ScrollViewer>
 		</Grid>

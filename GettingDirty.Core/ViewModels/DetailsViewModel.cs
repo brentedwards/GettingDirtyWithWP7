@@ -70,6 +70,7 @@ namespace GettingDirty.Core.ViewModels
 		public void NewTask()
 		{
 			TaskItem = new TaskItem();
+			TaskItem.CreatedDate = DateTime.Now;
 			Tasks.Add(TaskItem);
 		}
 
