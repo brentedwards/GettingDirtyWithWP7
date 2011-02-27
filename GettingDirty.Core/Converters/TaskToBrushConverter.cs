@@ -23,7 +23,7 @@ namespace GettingDirty.Core.Converters
 		{
 			var result = NormalBrush;
 
-			if (values.Length == 2)
+			if (values != null && values.Length == 2)
 			{
 				if (values[0] is bool)
 				{
