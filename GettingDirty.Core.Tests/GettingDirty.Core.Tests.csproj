@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="Converters\BoolToFontStyleConverterTests.cs" />
     <Compile Include="Converters\BoolToVisibilityConverterTests.cs" />
+    <Compile Include="Converters\PriorityToBrushConverterTests.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
