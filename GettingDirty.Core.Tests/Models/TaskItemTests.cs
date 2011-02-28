@@ -19,16 +19,16 @@ namespace GettingDirty.Core.Tests.Models
 	[TestClass]
 	public class TaskItemTests : SilverlightTest
 	{
-		private List<String> _propertiesChanged;
+		private List<String> PropertiesChanged { get; set; }
 		private void OnPropertyChanged(object sender, PropertyChangedEventArgs args)
 		{
-			_propertiesChanged.Add(args.PropertyName);
+			PropertiesChanged.Add(args.PropertyName);
 		}
 
 		[TestMethod]
 		public void Title()
 		{
-			_propertiesChanged = new List<String>();
+			PropertiesChanged = new List<String>();
 			var title = Guid.NewGuid().ToString();
 
 			var taskItem = new TaskItem();
@@ -38,13 +38,13 @@ namespace GettingDirty.Core.Tests.Models
 			taskItem.PropertyChanged -= OnPropertyChanged;
 
 			Assert.AreEqual(title, taskItem.Title, "Title");
-			Assert.IsTrue(_propertiesChanged.Contains("Title"), "Title Property Changed");
+			Assert.IsTrue(PropertiesChanged.Contains("Title"), "Title Property Changed");
 		}
 
 		[TestMethod]
 		public void Description()
 		{
-			_propertiesChanged = new List<String>();
+			PropertiesChanged = new List<String>();
 			var description = Guid.NewGuid().ToString();
 
 			var taskItem = new TaskItem();
@@ -54,13 +54,13 @@ namespace GettingDirty.Core.Tests.Models
 			taskItem.PropertyChanged -= OnPropertyChanged;
 
 			Assert.AreEqual(description, taskItem.Description, "Description");
-			Assert.IsTrue(_propertiesChanged.Contains("Description"), "Description Property Changed");
+			Assert.IsTrue(PropertiesChanged.Contains("Description"), "Description Property Changed");
 		}
 
 		[TestMethod]
 		public void CreatedDate()
 		{
-			_propertiesChanged = new List<String>();
+			PropertiesChanged = new List<String>();
 			var createdDate = DateTime.Now;
 
 			var taskItem = new TaskItem();
@@ -70,13 +70,13 @@ namespace GettingDirty.Core.Tests.Models
 			taskItem.PropertyChanged -= OnPropertyChanged;
 
 			Assert.AreEqual(createdDate, taskItem.CreatedDate, "CreatedDate");
-			Assert.IsTrue(_propertiesChanged.Contains("CreatedDate"), "CreatedDate Property Changed");
+			Assert.IsTrue(PropertiesChanged.Contains("CreatedDate"), "CreatedDate Property Changed");
 		}
 
 		[TestMethod]
 		public void DueDate()
 		{
-			_propertiesChanged = new List<String>();
+			PropertiesChanged = new List<String>();
 			var dueDate = DateTime.Now;
 
 			var taskItem = new TaskItem();
@@ -86,13 +86,13 @@ namespace GettingDirty.Core.Tests.Models
 			taskItem.PropertyChanged -= OnPropertyChanged;
 
 			Assert.AreEqual(dueDate, taskItem.DueDate, "DueDate");
-			Assert.IsTrue(_propertiesChanged.Contains("DueDate"), "DueDate Property Changed");
+			Assert.IsTrue(PropertiesChanged.Contains("DueDate"), "DueDate Property Changed");
 		}
 
 		[TestMethod]
 		public void Priority()
 		{
-			_propertiesChanged = new List<String>();
+			PropertiesChanged = new List<String>();
 			var priority = GettingDirty.Core.Models.Priority.High;
 
 			var taskItem = new TaskItem();
@@ -102,13 +102,13 @@ namespace GettingDirty.Core.Tests.Models
 			taskItem.PropertyChanged -= OnPropertyChanged;
 
 			Assert.AreEqual(priority, taskItem.Priority, "Priority");
-			Assert.IsTrue(_propertiesChanged.Contains("Priority"), "Priority Property Changed");
+			Assert.IsTrue(PropertiesChanged.Contains("Priority"), "Priority Property Changed");
 		}
 
 		[TestMethod]
 		public void IsCompleted()
 		{
-			_propertiesChanged = new List<String>();
+			PropertiesChanged = new List<String>();
 			var isCompleted = true;
 
 			var taskItem = new TaskItem();
@@ -118,7 +118,7 @@ namespace GettingDirty.Core.Tests.Models
 			taskItem.PropertyChanged -= OnPropertyChanged;
 
 			Assert.AreEqual(isCompleted, taskItem.IsCompleted, "IsCompleted");
-			Assert.IsTrue(_propertiesChanged.Contains("IsCompleted"), "IsCompleted Property Changed");
+			Assert.IsTrue(PropertiesChanged.Contains("IsCompleted"), "IsCompleted Property Changed");
 		}
 	}
 }

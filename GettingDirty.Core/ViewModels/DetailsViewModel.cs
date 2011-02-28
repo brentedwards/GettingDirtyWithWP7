@@ -19,12 +19,7 @@ namespace GettingDirty.Core.ViewModels
 	{
 		private ITaskRepository TaskRepository { get; set; }
 
-		public string ApplicationTitle
-		{
-			get { return "Getting Dirty with WP7"; }
-		}
-
-		private TaskItem _taskItem = new TaskItem();
+		private TaskItem _taskItem;
 		public TaskItem TaskItem
 		{
 			get { return _taskItem; }
@@ -32,14 +27,6 @@ namespace GettingDirty.Core.ViewModels
 			{
 				_taskItem = value;
 				NotifyPropertyChanged("TaskItem");
-			}
-		}
-
-		public Priority[] Priorities
-		{
-			get
-			{
-				return new Priority[] { Priority.High, Priority.Medium, Priority.Low };
 			}
 		}
 

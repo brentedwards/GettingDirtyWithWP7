@@ -17,6 +17,19 @@ namespace GettingDirty.Core.ViewModels
 {
 	public class ViewModelBase : ModelBase
 	{
+		public string ApplicationTitle
+		{
+			get { return "Getting Dirty with WP7"; }
+		}
+
+		public Priority[] Priorities
+		{
+			get
+			{
+				return new Priority[] { Priority.High, Priority.Medium, Priority.Low };
+			}
+		}
+
 		protected bool IsInDesignMode
 		{
 			get { return DesignerProperties.IsInDesignTool; }

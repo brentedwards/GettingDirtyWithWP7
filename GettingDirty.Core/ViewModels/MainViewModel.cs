@@ -15,11 +15,6 @@ namespace GettingDirty.Core.ViewModels
 		public RelayCommand<TaskItem> EditTaskCommand { get; private set; }
 		public RelayCommand<TaskItem> DeleteTaskCommand { get; private set; }
 
-		public string ApplicationTitle
-		{
-			get { return "Getting Dirty with WP7"; }
-		}
-
 		public string PageName
 		{
 			get { return "Tasks"; }
@@ -62,14 +57,6 @@ namespace GettingDirty.Core.ViewModels
 			}
 		}
 
-		public Priority[] Priorities
-		{
-			get
-			{
-				return new Priority[] { Priority.High, Priority.Medium, Priority.Low };
-			}
-		}
-
 
 		public MainViewModel(ITaskRepository taskRepository)
 		{
@@ -101,6 +88,7 @@ namespace GettingDirty.Core.ViewModels
 
 		public void LoadTasks()
 		{
+			// Just signal to the UI to load the tasks.
 			_tasks = null;
 			NotifyPropertyChanged("Tasks");
 		}

@@ -76,6 +76,9 @@
     <Compile Include="Models\TaskItemTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\TaskRepositoryTests.cs" />
+    <Compile Include="ViewModels\DetailsViewModelTests.cs" />
+    <Compile Include="ViewModels\MainViewModelTests.cs" />
+    <Compile Include="ViewModels\MockTaskRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
