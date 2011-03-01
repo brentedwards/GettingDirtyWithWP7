@@ -16,6 +16,7 @@ using GettingDirty.Core.Repositories;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using GettingDirty.Core.Tests.Mocks;
 
 namespace GettingDirty.Core.Tests.ViewModels
 {
@@ -28,6 +29,20 @@ namespace GettingDirty.Core.Tests.ViewModels
 			PropertiesChanged.Add(args.PropertyName);
 		}
 
+		private MockMessageBus MessageBus { get; set; }
+		private MockTaskRepository TaskRepository { get; set; }
+
+		private DetailsViewModel ViewModel { get; set; }
+
+		[TestInitialize]
+		public void Init()
+		{
+			MessageBus = new MockMessageBus();
+			TaskRepository = new MockTaskRepository();
+
+			ViewModel = new DetailsViewModel(MessageBus, TaskRepository);
+		}
+
 		[TestMethod]
 		public void TaskItem()
 		{
@@ -35,24 +50,18 @@ namespace GettingDirty.Core.Tests.ViewModels
 
 			var taskItem = new TaskItem();
 
-			var repository = new MockTaskRepository();
-			var viewModel = new DetailsViewModel(repository);
+			ViewModel.PropertyChanged += OnPropertyChanged;
+			ViewModel.TaskItem = taskItem;
+			ViewModel.PropertyChanged -= OnPropertyChanged;
 
-			viewModel.PropertyChanged += OnPropertyChanged;
-			viewModel.TaskItem = taskItem;
-			viewModel.PropertyChanged -= OnPropertyChanged;
-
-			Assert.AreSame(taskItem, viewModel.TaskItem, "TaskItem");
+			Assert.AreSame(taskItem, ViewModel.TaskItem, "TaskItem");
 			Assert.IsTrue(PropertiesChanged.Contains("TaskItem"), "TaskItem Property Changed.");
 		}
 
 		[TestMethod]
 		public void Priorities()
 		{
-			var repository = new MockTaskRepository();
-			var viewModel = new DetailsViewModel(repository);
-
-			var priorities = viewModel.Priorities;
+			var priorities = ViewModel.Priorities;
 
 			// Make sure that all the priority options are returned.
 			Assert.AreEqual(3, priorities.Length, "Length");
@@ -68,15 +77,11 @@ namespace GettingDirty.Core.Tests.ViewModels
 			var expectedTasks = new ObservableCollection<TaskItem>();
 			expectedTasks.Add(new TaskItem { TaskId = taskId });
 
-			var repository = new MockTaskRepository()
-			{
-				Tasks = expectedTasks
-			};
-			var viewModel = new DetailsViewModel(repository);
+			TaskRepository.Tasks = expectedTasks;
 
-			viewModel.Load(taskId);
+			ViewModel.Load(taskId);
 
-			var actualTask = viewModel.TaskItem;
+			var actualTask = ViewModel.TaskItem;
 
 			Assert.AreEqual(taskId, actualTask.TaskId);
 		}
@@ -86,15 +91,11 @@ namespace GettingDirty.Core.Tests.ViewModels
 		{
 			var expectedTasks = new ObservableCollection<TaskItem>();
 
-			var repository = new MockTaskRepository()
-			{
-				Tasks = expectedTasks
-			};
-			var viewModel = new DetailsViewModel(repository);
+			TaskRepository.Tasks = expectedTasks;
 
-			viewModel.NewTask();
+			ViewModel.NewTask();
 
-			var actualTask = viewModel.TaskItem;
+			var actualTask = ViewModel.TaskItem;
 
 			// Make sure the time stamp is only a few seconds old so we
 			// don't have random fails from checking exact equality when
@@ -109,22 +110,18 @@ namespace GettingDirty.Core.Tests.ViewModels
 			var expectedTasks = new ObservableCollection<TaskItem>();
 			expectedTasks.Add(new TaskItem { TaskId = taskId });
 
-			var repository = new MockTaskRepository()
-			{
-				Tasks = expectedTasks
-			};
-			var viewModel = new DetailsViewModel(repository);
+			TaskRepository.Tasks = expectedTasks;
 
 			// Load the tasks first, then save them.
-			viewModel.Load(taskId);
+			ViewModel.Load(taskId);
 
 			// Set the mock repository to null between the load and the save
 			// so that we can test that the save was correct.
-			repository.Tasks = null;
+			TaskRepository.Tasks = null;
 
-			viewModel.Save();
+			ViewModel.Save();
 
-			Assert.AreEqual(expectedTasks, repository.Tasks);
+			Assert.AreEqual(expectedTasks, TaskRepository.Tasks);
 		}
 	}
 }

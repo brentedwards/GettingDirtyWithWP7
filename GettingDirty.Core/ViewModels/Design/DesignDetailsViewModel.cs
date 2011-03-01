@@ -15,7 +15,7 @@ namespace GettingDirty.Core.ViewModels.Design
 	public class DesignDetailsViewModel : DetailsViewModel
 	{
 		public DesignDetailsViewModel()
-			: base(null)
+			: base(null, null)
 		{
 			TaskItem = new TaskItem()
 			{

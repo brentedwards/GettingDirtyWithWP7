@@ -12,7 +12,7 @@ using GettingDirty.Core.Repositories;
 using GettingDirty.Core.Models;
 using System.Collections.ObjectModel;
 
-namespace GettingDirty.Core.Tests.ViewModels
+namespace GettingDirty.Core.Tests.Mocks
 {
 	public class MockTaskRepository : ITaskRepository
 	{

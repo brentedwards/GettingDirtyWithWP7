@@ -12,10 +12,11 @@ using GettingDirty.Core.Models;
 using GettingDirty.Core.Repositories;
 using System.Collections.ObjectModel;
 using System.Linq;
+using MvvmFabric.Messaging;
 
 namespace GettingDirty.Core.ViewModels
 {
-	public class DetailsViewModel : ViewModelBase, IDetailsViewModel
+	public class DetailsViewModel : CoreViewModelBase, IDetailsViewModel
 	{
 		private ITaskRepository TaskRepository { get; set; }
 
@@ -44,7 +45,8 @@ namespace GettingDirty.Core.ViewModels
 			}
 		}
 
-		public DetailsViewModel(ITaskRepository taskRepository)
+		public DetailsViewModel(IMessageBus messageBus, ITaskRepository taskRepository)
+			: base(messageBus)
 		{
 			TaskRepository = taskRepository;
 		}

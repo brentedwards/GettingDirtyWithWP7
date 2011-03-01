@@ -1,32 +1,33 @@
-﻿using System;
-using System.Net;
+﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
+using GettingDirty.Core.Container;
+using GettingDirty.Core.Messaging;
 using Microsoft.Phone.Controls;
-using System.ComponentModel;
-using GalaSoft.MvvmLight.Messaging;
+using MvvmFabric.Messaging;
 
 namespace GettingDirty.Phone.Views
 {
 	public class CorePhoneApplicationPage : PhoneApplicationPage
 	{
-		public CorePhoneApplicationPage()
+		protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
 		{
-			Loaded += new RoutedEventHandler(CorePhoneApplicationPage_Loaded);
+			base.OnNavigatedFrom(e);
+
+			var messageBus = Ioc.Container.Resolve<IMessageBus>();
+			messageBus.Unsubscribe<NavigateMessage>(HandleNavigateMessage);
 		}
 
-		private void CorePhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+		protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
 		{
-			if (!DesignerProperties.IsInDesignTool)
-			{
-				Messenger.Default.Register<Uri>(this, "NavigationRequest", (uri) => NavigationService.Navigate(uri));
-			}
+			base.OnNavigatedTo(e);
+
+			var messageBus = Ioc.Container.Resolve<IMessageBus>();
+			messageBus.Subscribe<NavigateMessage>(HandleNavigateMessage);
+		}
+
+		private void HandleNavigateMessage(NavigateMessage message)
+		{
+			NavigationService.Navigate(message.Uri);
 		}
 	}
 }

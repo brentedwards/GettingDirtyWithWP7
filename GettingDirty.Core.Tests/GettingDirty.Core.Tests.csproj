@@ -73,12 +73,13 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Mocks\MockMessageBus.cs" />
     <Compile Include="Models\TaskItemTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\TaskRepositoryTests.cs" />
     <Compile Include="ViewModels\DetailsViewModelTests.cs" />
     <Compile Include="ViewModels\MainViewModelTests.cs" />
-    <Compile Include="ViewModels\MockTaskRepository.cs" />
+    <Compile Include="Mocks\MockTaskRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -108,6 +109,10 @@
     <ProjectReference Include="..\GettingDirty.Core\GettingDirty.Core.csproj">
       <Project>{9254532D-2FD1-464C-911B-3995A2FC3B02}</Project>
       <Name>GettingDirty.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvvmFabric.Phone\MvvmFabric.Phone.csproj">
+      <Project>{C2669CCD-99AF-4C2F-B690-2FD50B875CAB}</Project>
+      <Name>MvvmFabric.Phone</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />

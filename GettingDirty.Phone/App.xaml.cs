@@ -15,6 +15,7 @@ using Microsoft.Phone.Shell;
 using GettingDirty.Core.ViewModels;
 using GettingDirty.Core.Container;
 using GettingDirty.Core.Repositories;
+using MvvmFabric.Messaging;
 
 namespace GettingDirty.Phone
 {
@@ -64,6 +65,8 @@ namespace GettingDirty.Phone
 			container.Register<IDetailsViewModel, DetailsViewModel>();
 			container.Register<ITaskRepository, TaskRepository>();
 			container.Register<IIsolatedStorageRepository, IsolatedStorageRepository>();
+
+			container.RegisterInstance<IMessageBus>(new MessageBus());
 		}
 
 		// Code to execute when the application is launching (eg, from Start)

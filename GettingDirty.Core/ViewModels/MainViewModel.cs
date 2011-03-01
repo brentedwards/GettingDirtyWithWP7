@@ -1,19 +1,15 @@
 ﻿using System;
-using GalaSoft.MvvmLight.Command;
-using System.Windows;
-using GettingDirty.Core.Models;
 using System.Collections.ObjectModel;
+using GettingDirty.Core.Models;
 using GettingDirty.Core.Repositories;
+using MvvmFabric.Messaging;
+using MvvmFabric.Xaml;
 
 namespace GettingDirty.Core.ViewModels
 {
-	public class MainViewModel : ViewModelBase, IMainViewModel
+	public class MainViewModel : CoreViewModelBase, IMainViewModel
 	{
 		private ITaskRepository TaskRepository { get; set; }
-
-		public RelayCommand AddTaskCommand { get; private set; }
-		public RelayCommand<TaskItem> EditTaskCommand { get; private set; }
-		public RelayCommand<TaskItem> DeleteTaskCommand { get; private set; }
 
 		public string PageName
 		{
@@ -58,13 +54,10 @@ namespace GettingDirty.Core.ViewModels
 		}
 
 
-		public MainViewModel(ITaskRepository taskRepository)
+		public MainViewModel(IMessageBus messageBus, ITaskRepository taskRepository)
+			: base(messageBus)
 		{
 			TaskRepository = taskRepository;
-
-			AddTaskCommand = new RelayCommand(AddTask);
-			EditTaskCommand = new RelayCommand<TaskItem>(EditTask);
-			DeleteTaskCommand = new RelayCommand<TaskItem>(DeleteTask);
 
 			ResetNewTask();
 		}
@@ -76,13 +69,15 @@ namespace GettingDirty.Core.ViewModels
 			ResetNewTask();
 		}
 
-		public void EditTask(TaskItem taskItem)
+		public void EditTask(object sender, ExecuteEventArgs args)
 		{
+			var taskItem = args.MethodParameter as TaskItem;
 			SendNavigationRequestMessage(new Uri(string.Format("/Views/DetailsView.xaml?taskId={0}", taskItem.TaskId), UriKind.Relative));
 		}
 
-		public void DeleteTask(TaskItem taskItem)
+		public void DeleteTask(object sender, ExecuteEventArgs args)
 		{
+			var taskItem = args.MethodParameter as TaskItem;
 			Tasks.Remove(taskItem);
 		}
 

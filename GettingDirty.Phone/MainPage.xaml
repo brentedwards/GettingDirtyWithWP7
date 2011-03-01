@@ -7,7 +7,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:custom="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-	xmlns:mvvm="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP7"
+	xmlns:mvvm="clr-namespace:MvvmFabric.Xaml;assembly=MvvmFabric.Phone"
 	xmlns:GettingDirty_Core_Converters="clr-namespace:GettingDirty.Core.Converters;assembly=GettingDirty.Core"
 	xmlns:multi="clr-namespace:GettingDirty.Core.Converters.Multi;assembly=GettingDirty.Core"
 	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
@@ -30,20 +30,18 @@
 				<CheckBox d:LayoutOverrides="Width, Height" IsChecked="{Binding IsCompleted, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Left">
 					<toolkit:ContextMenuService.ContextMenu>
 						<toolkit:ContextMenu>
-							<toolkit:MenuItem Header="Edit Task Item">
-								<custom:Interaction.Triggers>
-									<custom:EventTrigger EventName="Click">
-										<mvvm:EventToCommand Command="{Binding Path=DataContext.EditTaskCommand, ElementName=Root}" CommandParameter="{Binding}" />
-									</custom:EventTrigger>
-								</custom:Interaction.Triggers>
-							</toolkit:MenuItem>
-							<toolkit:MenuItem Header="Delete Task Item">
-								<custom:Interaction.Triggers>
-									<custom:EventTrigger EventName="Click">
-										<mvvm:EventToCommand Command="{Binding Path=DataContext.DeleteTaskCommand, ElementName=Root}" CommandParameter="{Binding}" />
-									</custom:EventTrigger>
-								</custom:Interaction.Triggers>
-							</toolkit:MenuItem>
+							<toolkit:MenuItem x:Name="EditTask" Header="Edit Task Item" />
+							<mvvm:TriggerAction
+								DataContext="{Binding Path=DataContext, ElementName=Root}"
+								TargetControl="{Binding ElementName=EditTask}"
+								MethodName="EditTask"
+								MethodParameter="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}" />
+							<toolkit:MenuItem x:Name="DeleteTask" Header="Delete Task Item" />
+							<mvvm:TriggerAction
+								DataContext="{Binding Path=DataContext, ElementName=Root}"
+								TargetControl="{Binding ElementName=DeleteTask}"
+								MethodName="DeleteTask"
+								MethodParameter="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}" />
 						</toolkit:ContextMenu>
 					</toolkit:ContextMenuService.ContextMenu>
 					<TextBlock Margin="0,0,1,0" TextWrapping="Wrap" Text="{Binding Title}" VerticalAlignment="Center" d:LayoutOverrides="Width" Grid.Column="1" HorizontalAlignment="Left" FontStyle="{Binding IsCompleted, Converter={StaticResource BoolToFontStyleConverter}}">
@@ -108,7 +106,7 @@
 		</Style>
 		<DataTemplate x:Key="PriorityTemplate">
 			<Grid>
-				<Rectangle Fill="{Binding ., Converter={StaticResource PriorityToBrushConverter}}" Height="40" Stroke="Black" VerticalAlignment="Top" Width="40"/>
+				<Rectangle Fill="{Binding Path=., Converter={StaticResource PriorityToBrushConverter}}" Height="40" Stroke="Black" VerticalAlignment="Top" Width="40"/>
 			</Grid>
 		</DataTemplate>
 	</view:CorePhoneApplicationPage.Resources>
@@ -162,13 +160,10 @@
 					<ColumnDefinition Width="Auto"/>
 				</Grid.ColumnDefinitions>
 				<TextBox x:Name="NewTaskTitle" TextWrapping="Wrap" Text="{Binding NewTaskTitle, Mode=TwoWay}" VerticalAlignment="Bottom" d:LayoutOverrides="Height" Grid.Row="1"/>
-				<Button Content="+" VerticalAlignment="Bottom" Margin="0,0,0,3" d:LayoutOverrides="Height" Grid.Column="2" Grid.Row="1">
-					<custom:Interaction.Triggers>
-						<custom:EventTrigger EventName="Click">
-							<mvvm:EventToCommand Command="{Binding AddTaskCommand}" />
-						</custom:EventTrigger>
-					</custom:Interaction.Triggers>
-				</Button>
+				<Button x:Name="QuickAddTask" Content="+" VerticalAlignment="Bottom" Margin="0,0,0,3" d:LayoutOverrides="Height" Grid.Column="2" Grid.Row="1" />
+				<mvvm:TriggerAction
+					TargetControl="{Binding ElementName=QuickAddTask}"
+					MethodName="AddTask" />
 				<toolkit:ListPicker x:Name="NewTaskPriority" Margin="0,0,0,14" Width="100" d:LayoutOverrides="Height" Grid.Column="1" ItemsSource="{Binding Priorities}" ItemTemplate="{StaticResource PriorityTemplate}" SelectedItem="{Binding NewTaskPriority, Mode=TwoWay}" Grid.Row="1" />
 				<TextBlock TextWrapping="Wrap" Grid.ColumnSpan="3" Text="Quick Task"/>
 			</Grid>
