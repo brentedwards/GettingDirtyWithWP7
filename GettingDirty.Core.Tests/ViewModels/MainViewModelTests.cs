@@ -18,6 +18,7 @@ using System.ComponentModel;
 using MvvmFabric.Messaging;
 using GettingDirty.Core.Tests.Mocks;
 using MvvmFabric.Xaml;
+using GettingDirty.Core.Messaging;
 
 namespace GettingDirty.Core.Tests.ViewModels
 {
@@ -110,7 +111,19 @@ namespace GettingDirty.Core.Tests.ViewModels
 		[TestMethod]
 		public void EditTask()
 		{
-			Assert.Fail("TODO");
+			var taskId = Guid.NewGuid();
+			var taskItem = new TaskItem()
+			{
+				TaskId = taskId
+			};
+
+			var args = new ExecuteEventArgs()
+			{
+				MethodParameter = taskItem
+			};
+			ViewModel.EditTask(null, args);
+
+			Assert.IsTrue(((NavigateMessage)MessageBus.PublishedMessage).Uri.ToString().Contains(string.Format("taskId={0}", taskId)));
 		}
 
 		[TestMethod]
