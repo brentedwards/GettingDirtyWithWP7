@@ -11,6 +11,7 @@
 	xmlns:GettingDirty_Core_Converters="clr-namespace:GettingDirty.Core.Converters;assembly=GettingDirty.Core"
 	xmlns:multi="clr-namespace:GettingDirty.Core.Converters.Multi;assembly=GettingDirty.Core"
 	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+	xmlns:fabric="clr-namespace:MvvmFabric.Conversion;assembly=MvvmFabric.Phone"
 	x:Class="GettingDirty.Phone.MainPage"
 	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
 	SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
@@ -20,7 +21,7 @@
 	<view:CorePhoneApplicationPage.Resources>
 		<GettingDirty_Core_Converters:TaskToBrushConverter x:Key="TaskToBrushConverter" NormalBrush="{StaticResource PhoneForegroundBrush}" CompletedBrush="{StaticResource PhoneDisabledBrush}" OverdueBrush="{StaticResource PhoneAccentBrush}" />
 		<GettingDirty_Core_Converters:BoolToFontStyleConverter x:Key="BoolToFontStyleConverter" CompletedStyle="Italic"/>
-		<GettingDirty_Core_Converters:BoolToVisibilityConverter x:Key="VisibilityConverter"/>
+		<fabric:BoolToVisibilityConverter x:Key="VisibilityConverter"/>
 		<DataTemplate x:Key="TaskItemTemplate">
 			<Grid>
 				<Grid.ColumnDefinitions>
