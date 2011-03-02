@@ -28,35 +28,9 @@
 					<ColumnDefinition Width="Auto"/>
 				</Grid.ColumnDefinitions>
 				<CheckBox d:LayoutOverrides="Width, Height" IsChecked="{Binding IsCompleted, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Left">
-					<toolkit:ContextMenuService.ContextMenu>
-						<toolkit:ContextMenu>
-							<toolkit:MenuItem x:Name="EditTask" Header="Edit Task Item" />
-							<mvvm:TriggerAction
-								DataContext="{Binding Path=DataContext, ElementName=Root}"
-								TargetControl="{Binding ElementName=EditTask}"
-								MethodName="EditTask"
-								MethodParameter="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}" />
-							<toolkit:MenuItem x:Name="DeleteTask" Header="Delete Task Item" />
-							<mvvm:TriggerAction
-								DataContext="{Binding Path=DataContext, ElementName=Root}"
-								TargetControl="{Binding ElementName=DeleteTask}"
-								MethodName="DeleteTask"
-								MethodParameter="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}" />
-						</toolkit:ContextMenu>
-					</toolkit:ContextMenuService.ContextMenu>
+					
 					<TextBlock Margin="0,0,1,0" TextWrapping="Wrap" Text="{Binding Title}" VerticalAlignment="Center" d:LayoutOverrides="Width" Grid.Column="1" HorizontalAlignment="Left" FontStyle="{Binding IsCompleted, Converter={StaticResource BoolToFontStyleConverter}}">
-						<multi:BindingUtil.MultiBindings>
-							<multi:MultiBindings>
-								<multi:MultiBinding TargetProperty="Foreground" Converter="{StaticResource TaskToBrushConverter}">
-									<multi:MultiBinding.Bindings>
-										<multi:BindingCollection>
-											<Binding Path="IsCompleted"/>                            
-											<Binding Path="DueDate"/>
-										</multi:BindingCollection>
-									</multi:MultiBinding.Bindings>
-								</multi:MultiBinding>
-							</multi:MultiBindings>
-						</multi:BindingUtil.MultiBindings>
+						
 					</TextBlock>
 				</CheckBox>
 				<Rectangle Fill="{Binding Priority, Converter={StaticResource PriorityToBrushConverter}}" Margin="0" Grid.Column="1" Width="40" Height="40" HorizontalAlignment="Right" VerticalAlignment="Center" Stroke="Black"/>

@@ -13,11 +13,6 @@ namespace GettingDirty.Core.Messaging
 {
 	public class NavigateMessage
 	{
-		public Uri Uri { get; private set; }
-
-		public NavigateMessage(Uri uri)
-		{
-			Uri = uri;
-		}
+		// NavigateMessage
 	}
 }

@@ -30,40 +30,13 @@ namespace GettingDirty.Phone
 			ViewModel = DataContext as IMainViewModel;
 		}
 
-		protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
-		{
-			// Save state
-			State[KEY_TITLE] = NewTaskTitle.Text;
-			State[KEY_PRIORITY] = NewTaskPriority.SelectedItem;
+		// TODO: 2. OnNavigatedFrom
 
-			// Save tasks
-			ViewModel.SaveTasks();
-
-			base.OnNavigatedFrom(e);
-		}
-
-		protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
-		{
-			base.OnNavigatedTo(e);
-
-			// Restore state, if it exists
-			object value;
-			if (State.TryGetValue(KEY_TITLE, out value))
-			{
-				NewTaskTitle.Text = value.ToString();
-			}
-
-			if (State.TryGetValue(KEY_PRIORITY, out value))
-			{
-				NewTaskPriority.SelectedItem = value;
-			}
-
-			ViewModel.LoadTasks();
-		}
+		// TODO: 3. OnNavigatedTo
 
 		private void NewTask_Click(object sender, EventArgs e)
 		{
-			NavigationService.Navigate(new Uri("/Views/DetailsView.xaml", UriKind.Relative));
+			// TODO: 1. Navigate
 		}
 	}
 }

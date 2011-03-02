@@ -68,9 +68,6 @@
 				<StackPanel>
 					<TextBlock TextWrapping="Wrap" Text="Title"/>
 					<TextBox TextWrapping="Wrap" Text="{Binding TaskItem.Title, Mode=TwoWay, UpdateSourceTrigger=Explicit}">
-						<interactivity:Interaction.Behaviors>
-							<behaviors:UpdateSourceOnTextChangedBehavior />
-						</interactivity:Interaction.Behaviors>
 					</TextBox>
 					<TextBlock TextWrapping="Wrap" Text="Priority"/>
 					<toolkit:ListPicker Margin="8,0" ItemTemplate="{StaticResource PriorityTemplate}" ItemsSource="{Binding Priorities}" SelectedItem="{Binding TaskItem.Priority}"/>
@@ -80,9 +77,7 @@
 					<CheckBox Content="Completed" IsChecked="{Binding TaskItem.IsCompleted, Mode=TwoWay}"/>
 					<TextBlock TextWrapping="Wrap"><Run Text="Description"/><LineBreak/><Run/></TextBlock>
 					<TextBox TextWrapping="Wrap" Text="{Binding TaskItem.Description, UpdateSourceTrigger=Explicit}">
-						<interactivity:Interaction.Behaviors>
-							<behaviors:UpdateSourceOnTextChangedBehavior />
-						</interactivity:Interaction.Behaviors>
+						
 					</TextBox>
 				</StackPanel>
 			</ScrollViewer>

@@ -62,24 +62,11 @@ namespace GettingDirty.Core.ViewModels
 			ResetNewTask();
 		}
 
-		public void AddTask()
-		{
-			Tasks.Add(new TaskItem() { TaskId = Guid.NewGuid(), Title = NewTaskTitle, Priority = NewTaskPriority });
+		// TODO: AddTask
 
-			ResetNewTask();
-		}
+		// TODO: EditTask
 
-		public void EditTask(object sender, ExecuteEventArgs args)
-		{
-			var taskItem = args.MethodParameter as TaskItem;
-			SendNavigationRequestMessage(new Uri(string.Format("/Views/DetailsView.xaml?taskId={0}", taskItem.TaskId), UriKind.Relative));
-		}
-
-		public void DeleteTask(object sender, ExecuteEventArgs args)
-		{
-			var taskItem = args.MethodParameter as TaskItem;
-			Tasks.Remove(taskItem);
-		}
+		// TODO: DeleteTask
 
 		public void LoadTasks()
 		{
