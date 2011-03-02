@@ -29,9 +29,6 @@ namespace GettingDirty.Core.ViewModels
 			MessageBus = messageBus;
 		}
 
-		protected void SendNavigationRequestMessage(Uri uri)
-		{
-			MessageBus.Publish<NavigateMessage>(new NavigateMessage(uri));
-		}
+		// TODO: SendNavigationRequestMessage
 	}
 }
