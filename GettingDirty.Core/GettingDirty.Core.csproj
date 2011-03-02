@@ -58,7 +58,6 @@
     <Compile Include="Container\Ioc.cs" />
     <Compile Include="Container\SimpleContainer.cs" />
     <Compile Include="Converters\BoolToFontStyleConverter.cs" />
-    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\Multi\BindingUtil.cs" />
     <Compile Include="Converters\Multi\IMultiValueConverter.cs" />
     <Compile Include="Converters\Multi\MultiBinding.cs" />
