@@ -62,11 +62,11 @@ namespace GettingDirty.Core.ViewModels
 			ResetNewTask();
 		}
 
-		// TODO: AddTask
+		// TODO: 1. AddTask
 
-		// TODO: EditTask
+		// TODO: 2. EditTask
 
-		// TODO: DeleteTask
+		// TODO: 3. DeleteTask
 
 		public void LoadTasks()
 		{
