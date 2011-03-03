@@ -74,9 +74,9 @@
 					</TextBox>
 					<TextBlock TextWrapping="Wrap" Text="Priority"/>
 					<toolkit:ListPicker Margin="8,0" ItemTemplate="{StaticResource PriorityTemplate}" ItemsSource="{Binding Priorities}" SelectedItem="{Binding TaskItem.Priority}"/>
-					<toolkit:DatePicker Value="{Binding TaskItem.DueDate}" Header="Due Date" ValueChanged="DatePicker_ValueChanged" HeaderTemplate="{StaticResource DueTimeHeaderTemplate}"/>
+					<toolkit:DatePicker Value="{Binding TaskItem.DueDate}" Header="Due Date" HeaderTemplate="{StaticResource DueTimeHeaderTemplate}"/>
 					<TextBlock TextWrapping="Wrap" Text="Due Time"/>
-					<toolkit:TimePicker Value="{Binding TaskItem.DueDate}" ValueChanged="DatePicker_ValueChanged"/>
+					<toolkit:TimePicker Value="{Binding TaskItem.DueDate}"/>
 					<CheckBox Content="Completed" IsChecked="{Binding TaskItem.IsCompleted, Mode=TwoWay}"/>
 					<TextBlock TextWrapping="Wrap"><Run Text="Description"/><LineBreak/><Run/></TextBlock>
 					<TextBox TextWrapping="Wrap" Text="{Binding TaskItem.Description, UpdateSourceTrigger=Explicit}">

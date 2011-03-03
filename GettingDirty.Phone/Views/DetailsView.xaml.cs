@@ -11,11 +11,18 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using GettingDirty.Core.ViewModels;
+using GettingDirty.Core.Models;
 
 namespace GettingDirty.Phone.Views
 {
 	public partial class DetailsView : CorePhoneApplicationPage
 	{
+		private const string KEY_TITLE = "Title";
+		private const string KEY_PRIORITY = "Priority";
+		private const string KEY_DUE_DATE = "DueDate";
+		private const string KEY_IS_COMPLETED = "IsCompleted";
+		private const string KEY_DESCRIPTION = "Description";
+
 		private IDetailsViewModel ViewModel { get; set; }
 
 		public DetailsView()
@@ -23,6 +30,17 @@ namespace GettingDirty.Phone.Views
 			InitializeComponent();
 
 			ViewModel = DataContext as IDetailsViewModel;
+		}
+
+		protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+		{
+			State[KEY_TITLE] = ViewModel.TaskItem.Title;
+			State[KEY_PRIORITY] = ViewModel.TaskItem.Priority;
+			State[KEY_DUE_DATE] = ViewModel.TaskItem.DueDate;
+			State[KEY_IS_COMPLETED] = ViewModel.TaskItem.IsCompleted;
+			State[KEY_DESCRIPTION] = ViewModel.TaskItem.Description;
+			
+			base.OnNavigatedFrom(e);
 		}
 
 		protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -37,7 +55,36 @@ namespace GettingDirty.Phone.Views
 			}
 			else
 			{
-				ViewModel.NewTask();
+				if (ViewModel.TaskItem == null)
+				{
+					ViewModel.NewTask();
+				}
+
+				object value;
+				if (State.TryGetValue(KEY_TITLE, out value))
+				{
+					ViewModel.TaskItem.Title = (string)value;
+				}
+
+				if (State.TryGetValue(KEY_PRIORITY, out value))
+				{
+					ViewModel.TaskItem.Priority = (Priority)value;
+				}
+
+				if (State.TryGetValue(KEY_DUE_DATE, out value))
+				{
+					ViewModel.TaskItem.DueDate = (DateTime?)value;
+				}
+
+				if (State.TryGetValue(KEY_IS_COMPLETED, out value))
+				{
+					ViewModel.TaskItem.IsCompleted = (bool)value;
+				}
+
+				if (State.TryGetValue(KEY_DESCRIPTION, out value))
+				{
+					ViewModel.TaskItem.Description = (string)value;
+				}
 			}
 		}
 
@@ -68,14 +115,6 @@ namespace GettingDirty.Phone.Views
 		private void Cancel_Click(object sender, EventArgs e)
 		{
 			NavigationService.GoBack();
-		}
-
-		private void DatePicker_ValueChanged(object sender, DateTimeValueChangedEventArgs e)
-		{
-			if (ViewModel != null)
-			{
-				ViewModel.TaskItem.DueDate = e.NewDateTime;
-			}
 		}
 	}
 }

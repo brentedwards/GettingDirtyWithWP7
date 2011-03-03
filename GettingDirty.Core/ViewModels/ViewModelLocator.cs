@@ -25,23 +25,20 @@ namespace GettingDirty.Core.ViewModels
 			}
 		}
 
-		private IDetailsViewModel _detailsViewModel;
 		public IDetailsViewModel DetailsViewModel
 		{
 			get
 			{
-				if (_detailsViewModel == null)
+				IDetailsViewModel detailsViewModel;
+				if (IsInDesignMode)
 				{
-					if (IsInDesignMode)
-					{
-						_detailsViewModel = new DesignDetailsViewModel();
-					}
-					else
-					{
-						_detailsViewModel = Ioc.Container.Resolve<IDetailsViewModel>();
-					}
+					detailsViewModel = new DesignDetailsViewModel();
 				}
-				return _detailsViewModel;
+				else
+				{
+					detailsViewModel = Ioc.Container.Resolve<IDetailsViewModel>();
+				}
+				return detailsViewModel;
 			}
 		}
 
