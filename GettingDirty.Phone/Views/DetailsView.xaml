@@ -22,7 +22,7 @@
 					<ColumnDefinition Width="Auto"/>
 				</Grid.ColumnDefinitions>
 				<TextBlock Margin="0,0,1,7" TextWrapping="Wrap" Text="{Binding .}" d:LayoutOverrides="Width, Height"/>
-				<Rectangle Stroke="Black" Width="40" Height="40" Grid.Column="1" Fill="{Binding ., Converter={StaticResource PriorityToBrushConverter}}"/>
+				<Rectangle Stroke="Black" Width="40" Height="40" Grid.Column="1" />
 			</Grid>
 		</DataTemplate>
 		<DataTemplate x:Key="DueTimeHeaderTemplate">
@@ -47,9 +47,7 @@
 	<view:CorePhoneApplicationPage.Foreground>
 		<StaticResource ResourceKey="PhoneForegroundBrush"/>
 	</view:CorePhoneApplicationPage.Foreground>
-	<view:CorePhoneApplicationPage.DataContext>
-		<Binding Path="DetailsViewModel" Source="{StaticResource Locator}"/>
-	</view:CorePhoneApplicationPage.DataContext>
+	<!-- TODO: DataContext -->
 <!--LayoutRoot is the root grid where all page content is placed-->
 	<Grid x:Name="LayoutRoot" Background="Transparent">
 		<Grid.RowDefinitions>
@@ -68,7 +66,7 @@
 				<StackPanel>
 					<TextBlock TextWrapping="Wrap" Text="Title"/>
 					<TextBox TextWrapping="Wrap" Text="{Binding TaskItem.Title, Mode=TwoWay, UpdateSourceTrigger=Explicit}">
-						<!-- TODO: Behavior -->s
+						<!-- TODO: Behavior -->
 					</TextBox>
 					<TextBlock TextWrapping="Wrap" Text="Priority"/>
 					<toolkit:ListPicker Margin="8,0" ItemTemplate="{StaticResource PriorityTemplate}" ItemsSource="{Binding Priorities}" SelectedItem="{Binding TaskItem.Priority}"/>
