@@ -73,7 +73,7 @@
 						</interactivity:Interaction.Behaviors>
 					</TextBox>
 					<TextBlock TextWrapping="Wrap" Text="Priority"/>
-					<toolkit:ListPicker Margin="8,0" ItemTemplate="{StaticResource PriorityTemplate}" ItemsSource="{Binding Priorities}" SelectedItem="{Binding TaskItem.Priority}"/>
+					<toolkit:ListPicker Margin="8,0" ItemTemplate="{StaticResource PriorityTemplate}" ItemsSource="{Binding Priorities}" SelectedItem="{Binding TaskItem.Priority, Mode=TwoWay}"/>
 					<toolkit:DatePicker Value="{Binding TaskItem.DueDate}" Header="Due Date" HeaderTemplate="{StaticResource DueTimeHeaderTemplate}"/>
 					<TextBlock TextWrapping="Wrap" Text="Due Time"/>
 					<toolkit:TimePicker Value="{Binding TaskItem.DueDate}"/>
