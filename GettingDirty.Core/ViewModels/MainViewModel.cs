@@ -23,7 +23,8 @@ namespace GettingDirty.Core.ViewModels
 			{
 				if (_tasks == null)
 				{
-					Tasks = TaskRepository.LoadTasks();
+					// TODO: 2. LoadTasks
+					Tasks = new ObservableCollection<TaskItem>();
 				}
 
 				return _tasks;
@@ -64,9 +65,9 @@ namespace GettingDirty.Core.ViewModels
 
 		// TODO: 1. AddTask
 
-		// TODO: 2. EditTask
+		// TODO: 3. EditTask
 
-		// TODO: 3. DeleteTask
+		// TODO: 4. DeleteTask
 
 		public void LoadTasks()
 		{
