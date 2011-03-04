@@ -13,8 +13,25 @@ using GettingDirty.Core.Models;
 
 namespace GettingDirty.Core.Repositories
 {
-	// TODO: TaskRepository
-	public class TaskRepository
+	public class TaskRepository : ITaskRepository
 	{
+		public const String FILE_NAME = "Tasks.dat";
+
+		private IIsolatedStorageRepository StorageRepository { get; set; }
+
+		public TaskRepository(IIsolatedStorageRepository storageRepository)
+		{
+			StorageRepository = storageRepository;
+		}
+
+		public ObservableCollection<TaskItem> LoadTasks()
+		{
+			return StorageRepository.LoadData<ObservableCollection<TaskItem>>(FILE_NAME);
+		}
+
+		public void SaveTasks(ObservableCollection<TaskItem> tasks)
+		{
+			StorageRepository.SaveData<ObservableCollection<TaskItem>>(tasks, FILE_NAME);
+		}
 	}
 }
