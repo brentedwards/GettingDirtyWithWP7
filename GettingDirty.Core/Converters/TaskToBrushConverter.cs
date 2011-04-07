@@ -13,8 +13,39 @@ using GettingDirty.Core.Converters.Multi;
 
 namespace GettingDirty.Core.Converters
 {
-	// TODO: TaskToBrushConverter
-	public class TaskToBrushConverter
+	public class TaskToBrushConverter : IMultiValueConverter
 	{
+		public Brush NormalBrush { get; set; }
+		public Brush CompletedBrush { get; set; }
+		public Brush OverdueBrush { get; set; }
+
+		public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+		{
+			var result = NormalBrush;
+
+			if (values != null && values.Length == 2)
+			{
+				if (values[0] is bool)
+				{
+					var dueDate = values[1] as DateTime?;
+					if (dueDate != null && dueDate.HasValue && dueDate.Value < DateTime.Now)
+					{
+						result = OverdueBrush;
+					}
+
+					if ((bool)values[0])
+					{
+						result = CompletedBrush;
+					}
+				}
+			}
+
+			return result;
+		}
+
+		public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
