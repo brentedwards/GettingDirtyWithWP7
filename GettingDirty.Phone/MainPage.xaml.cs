@@ -20,14 +20,14 @@ namespace GettingDirty.Phone
 		private const string KEY_TITLE = "NewTaskTitle";
 		private const string KEY_PRIORITY = "NewTaskPriority";
 
-		private IMainViewModel ViewModel { get; set; }
+		private MainViewModel ViewModel { get; set; }
 
 		// Constructor
 		public MainPage()
 		{
 			InitializeComponent();
 
-			ViewModel = DataContext as IMainViewModel;
+			ViewModel = DataContext as MainViewModel;
 		}
 
 		protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)

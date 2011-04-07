@@ -61,8 +61,8 @@ namespace GettingDirty.Phone
 		private void InitializeContainer()
 		{
 			var container = Ioc.Container;
-			container.Register<IMainViewModel, MainViewModel>();
-			container.Register<IDetailsViewModel, DetailsViewModel>();
+			container.Register<MainViewModel, MainViewModel>();
+			container.Register<DetailsViewModel, DetailsViewModel>();
 			container.Register<ITaskRepository, TaskRepository>();
 			container.Register<IIsolatedStorageRepository, IsolatedStorageRepository>();
 

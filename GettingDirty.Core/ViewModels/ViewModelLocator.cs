@@ -5,8 +5,8 @@ namespace GettingDirty.Core.ViewModels
 {
 	public class ViewModelLocator
 	{
-		private IMainViewModel _mainViewModel;
-		public IMainViewModel MainViewModel
+		private MainViewModel _mainViewModel;
+		public MainViewModel MainViewModel
 		{
 			get
 			{
@@ -18,25 +18,25 @@ namespace GettingDirty.Core.ViewModels
 					}
 					else
 					{
-						_mainViewModel = Ioc.Container.Resolve<IMainViewModel>();
+						_mainViewModel = Ioc.Container.Resolve<MainViewModel>();
 					}
 				}
 				return _mainViewModel;
 			}
 		}
 
-		public IDetailsViewModel DetailsViewModel
+		public DetailsViewModel DetailsViewModel
 		{
 			get
 			{
-				IDetailsViewModel detailsViewModel;
+				DetailsViewModel detailsViewModel;
 				if (IsInDesignMode)
 				{
 					detailsViewModel = new DesignDetailsViewModel();
 				}
 				else
 				{
-					detailsViewModel = Ioc.Container.Resolve<IDetailsViewModel>();
+					detailsViewModel = Ioc.Container.Resolve<DetailsViewModel>();
 				}
 				return detailsViewModel;
 			}
