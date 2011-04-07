@@ -19,6 +19,17 @@
 	x:Name="Root"
 	>
 	<view:CorePhoneApplicationPage.Resources>
+		<DataTemplate x:Key="TaskItemTemplate">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+				<CheckBox Content="{Binding Title}" d:LayoutOverrides="Width, Height" IsChecked="{Binding IsCompleted, Mode=TwoWay}"/>
+				<Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Stroke="Black" Width="40" Height="40" Grid.Column="1"/>
+				<Rectangle Fill="#FFF4F4F5" Stroke="Black" Margin="52,35,8,32" Grid.ColumnSpan="2"/>
+			</Grid>
+		</DataTemplate>
 	</view:CorePhoneApplicationPage.Resources>
 
 	<view:CorePhoneApplicationPage.FontFamily>
@@ -56,7 +67,7 @@
 
 	<!--ContentPanel - place additional content here-->
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-			<ListBox Margin="8" ItemsSource="{Binding Tasks}"/>
+			<ListBox Margin="8" ItemsSource="{Binding Tasks}" ItemTemplate="{StaticResource TaskItemTemplate}"/>
 		</Grid>
 	</Grid>
 
