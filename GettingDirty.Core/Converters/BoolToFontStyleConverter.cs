@@ -12,8 +12,24 @@ using System.Windows.Data;
 
 namespace GettingDirty.Core.Converters
 {
-	// TODO: BoolToFontStyleConverter
-	public class BoolToFontStyleConverter
+	public class BoolToFontStyleConverter : IValueConverter
 	{
+		public FontStyle CompletedStyle { get; set; }
+
+		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+		{
+			var result = FontStyles.Normal;
+			if (value is bool)
+			{
+				result = (bool)value ? CompletedStyle : FontStyles.Normal;
+			}
+
+			return result;
+		}
+
+		public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

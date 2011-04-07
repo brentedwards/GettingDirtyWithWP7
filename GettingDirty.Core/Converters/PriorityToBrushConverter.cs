@@ -13,8 +13,40 @@ using GettingDirty.Core.Models;
 
 namespace GettingDirty.Core.Converters
 {
-	// TODO: PriorityToBrushConverter
-	public class PriorityToBrushConverter
+	public class PriorityToBrushConverter : IValueConverter
 	{
+		public Brush LowBrush { get; set; }
+		public Brush MediumBrush { get; set; }
+		public Brush HighBrush { get; set; }
+
+		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+		{
+			var result = MediumBrush;
+
+			if (value is Priority)
+			{
+				switch ((Priority)value)
+				{
+					case Priority.Low:
+						result = LowBrush;
+						break;
+
+					case Priority.Medium:
+						result = MediumBrush;
+						break;
+
+					case Priority.High:
+						result = HighBrush;
+						break;
+				}
+			}
+
+			return result;
+		}
+
+		public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

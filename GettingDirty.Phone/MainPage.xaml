@@ -19,15 +19,20 @@
 	x:Name="Root"
 	>
 	<view:CorePhoneApplicationPage.Resources>
+		<GettingDirty_Core_Converters:BoolToFontStyleConverter x:Key="BoolToFontStyleConverter" CompletedStyle="Italic"/>
+		<GettingDirty_Core_Converters:PriorityToBrushConverter x:Key="PriorityToBrushConverter" LowBrush="White" MediumBrush="LightGreen" HighBrush="Green"/>
+		<fabric:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 		<DataTemplate x:Key="TaskItemTemplate">
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition/>
 					<ColumnDefinition Width="Auto"/>
 				</Grid.ColumnDefinitions>
-				<CheckBox Content="{Binding Title}" d:LayoutOverrides="Width, Height" IsChecked="{Binding IsCompleted, Mode=TwoWay}"/>
-				<Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Stroke="Black" Width="40" Height="40" Grid.Column="1"/>
-				<Rectangle Fill="#FFF4F4F5" Stroke="Black" Margin="52,35,8,32" Grid.ColumnSpan="2"/>
+				<CheckBox d:LayoutOverrides="Width, Height" IsChecked="{Binding IsCompleted, Mode=TwoWay}">
+					<TextBlock TextWrapping="Wrap" Text="{Binding Title}" FontStyle="{Binding IsCompleted, Converter={StaticResource BoolToFontStyleConverter}}"/>
+				</CheckBox>
+				<Rectangle Fill="{Binding Priority, Converter={StaticResource PriorityToBrushConverter}}" HorizontalAlignment="Left" Stroke="Black" Width="40" Height="40" Grid.Column="1"/>
+				<Rectangle Fill="#FFF4F4F5" Stroke="Black" Margin="52,35,8,32" Grid.ColumnSpan="2" Visibility="{Binding IsCompleted, Converter={StaticResource BoolToVisibilityConverter}}"/>
 			</Grid>
 		</DataTemplate>
 	</view:CorePhoneApplicationPage.Resources>
