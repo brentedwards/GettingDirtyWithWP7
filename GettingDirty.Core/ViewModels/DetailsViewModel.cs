@@ -16,7 +16,7 @@ using MvvmFabric.Messaging;
 
 namespace GettingDirty.Core.ViewModels
 {
-	public class DetailsViewModel : CoreViewModelBase, IDetailsViewModel
+	public class DetailsViewModel : CoreViewModelBase
 	{
 		private ITaskRepository TaskRepository { get; set; }
 

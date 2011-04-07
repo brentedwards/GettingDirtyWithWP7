@@ -7,7 +7,7 @@ using MvvmFabric.Xaml;
 
 namespace GettingDirty.Core.ViewModels
 {
-	public class MainViewModel : CoreViewModelBase, IMainViewModel
+	public class MainViewModel : CoreViewModelBase
 	{
 		private ITaskRepository TaskRepository { get; set; }
 

@@ -23,13 +23,13 @@ namespace GettingDirty.Phone.Views
 		private const string KEY_IS_COMPLETED = "IsCompleted";
 		private const string KEY_DESCRIPTION = "Description";
 
-		private IDetailsViewModel ViewModel { get; set; }
+		private DetailsViewModel ViewModel { get; set; }
 
 		public DetailsView()
 		{
 			InitializeComponent();
 
-			ViewModel = DataContext as IDetailsViewModel;
+			ViewModel = DataContext as DetailsViewModel;
 		}
 
 		// TODO: State
