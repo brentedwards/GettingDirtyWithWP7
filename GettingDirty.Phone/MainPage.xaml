@@ -30,8 +30,10 @@
 	<view:CorePhoneApplicationPage.Foreground>
 		<StaticResource ResourceKey="PhoneForegroundBrush"/>
 	</view:CorePhoneApplicationPage.Foreground>
-	
-	<!-- TODO: DataContext -->
+
+	<view:CorePhoneApplicationPage.DataContext>
+		<Binding Path="MainViewModel" Source="{StaticResource Locator}"/>
+	</view:CorePhoneApplicationPage.DataContext>
 	
 	<view:CorePhoneApplicationPage.ApplicationBar>
 		<shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">

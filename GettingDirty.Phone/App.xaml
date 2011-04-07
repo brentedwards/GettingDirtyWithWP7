@@ -12,7 +12,7 @@
 
 	<!--Application Resources-->
 	<Application.Resources>
-		<!-- TODO: 1. ViewModelLocator -->
+		<vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
 		
 		<!-- TODO: 2. PriorityToBrushConverter -->
 	</Application.Resources>
