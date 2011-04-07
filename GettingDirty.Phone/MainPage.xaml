@@ -56,6 +56,7 @@
 
 	<!--ContentPanel - place additional content here-->
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+			<ListBox Margin="8" ItemsSource="{Binding Tasks}"/>
 		</Grid>
 	</Grid>
 
