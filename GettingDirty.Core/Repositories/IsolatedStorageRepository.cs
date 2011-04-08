@@ -18,13 +18,42 @@ namespace GettingDirty.Core.Repositories
 	{
 		public void SaveData<TData>(TData data, string fileName)
 		{
-			// TODO: 1. SaveData
+			using (var storageFile = IsolatedStorageFile.GetUserStoreForApplication())
+			{
+				using (var fileStream = storageFile.CreateFile(fileName))
+				{
+					var serializer = new XmlSerializer(typeof(TData));
+					serializer.Serialize(fileStream, data);
+				}
+			}
 		}
 
 		public TData LoadData<TData>(string fileName)
 		{
-			// TODO: 2. LoadData
-			return default(TData);
+			TData data = default(TData);
+			using (var storageFile = IsolatedStorageFile.GetUserStoreForApplication())
+			{
+				if (storageFile.FileExists(fileName))
+				{
+					using (var fileStream = storageFile.OpenFile(fileName, FileMode.Open))
+					{
+						var serializer = new XmlSerializer(typeof(TData));
+						var obj = serializer.Deserialize(fileStream);
+
+						if (obj != null && obj is TData)
+						{
+							data = (TData)obj;
+						}
+					}
+				}
+			}
+
+			if (Object.Equals(data, default(TData)))
+			{
+				data = Activator.CreateInstance<TData>();
+			}
+
+			return data;
 		}
 	}
 }
