@@ -4,8 +4,26 @@ using System.Windows.Interactivity;
 
 namespace GettingDirty.Core.Behaviors
 {
-	// TODO: UpdateSourceOnTextChangedBehavior
-	public class UpdateSourceOnTextChangedBehavior
+	public class UpdateSourceOnTextChangedBehavior : Behavior<TextBox>
 	{
+		protected override void OnAttached()
+		{
+			base.OnAttached();
+
+			AssociatedObject.TextChanged += OnTextChanged;
+		}
+
+		protected override void OnDetaching()
+		{
+			base.OnDetaching();
+
+			AssociatedObject.TextChanged -= OnTextChanged;
+		}
+
+		private void OnTextChanged(object sender, TextChangedEventArgs e)
+		{
+			BindingExpression bindingExpression = AssociatedObject.GetBindingExpression(TextBox.TextProperty);
+			bindingExpression.UpdateSource();
+		}
 	}
 }
