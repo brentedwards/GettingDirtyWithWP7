@@ -13,8 +13,8 @@
 	<!--Application Resources-->
 	<Application.Resources>
 		<vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
-		
-		<!-- TODO: 2. PriorityToBrushConverter -->
+
+		<GettingDirty_Core_Converters:PriorityToBrushConverter x:Key="PriorityToBrushConverter" LowBrush="White" MediumBrush="LightGreen" HighBrush="Green"/>
 	</Application.Resources>
 
 	<Application.ApplicationLifetimeObjects>

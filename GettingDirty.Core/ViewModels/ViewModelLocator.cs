@@ -25,7 +25,22 @@ namespace GettingDirty.Core.ViewModels
 			}
 		}
 
-		// TODO: 2. DetailsViewModel
+		public DetailsViewModel DetailsViewModel
+		{
+			get
+			{
+				DetailsViewModel detailsViewModel;
+				if (IsInDesignMode)
+				{
+					detailsViewModel = new DesignDetailsViewModel();
+				}
+				else
+				{
+					detailsViewModel = Ioc.Container.Resolve<DetailsViewModel>();
+				}
+				return detailsViewModel;
+			}
+		}
 
 		private bool IsInDesignMode
 		{

@@ -21,7 +21,6 @@
 	<view:CorePhoneApplicationPage.Resources>
 		<GettingDirty_Core_Converters:TaskToBrushConverter x:Key="TaskToBrushConverter" NormalBrush="{StaticResource PhoneForegroundBrush}" CompletedBrush="{StaticResource PhoneDisabledBrush}" OverdueBrush="{StaticResource PhoneAccentBrush}" />
 		<GettingDirty_Core_Converters:BoolToFontStyleConverter x:Key="BoolToFontStyleConverter" CompletedStyle="Italic"/>
-		<GettingDirty_Core_Converters:PriorityToBrushConverter x:Key="PriorityToBrushConverter" LowBrush="White" MediumBrush="LightGreen" HighBrush="Green"/>
 		<fabric:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 		<DataTemplate x:Key="TaskItemTemplate">
 			<Grid>
