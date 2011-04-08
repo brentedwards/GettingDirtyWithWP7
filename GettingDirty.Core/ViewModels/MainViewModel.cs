@@ -63,7 +63,12 @@ namespace GettingDirty.Core.ViewModels
 			ResetNewTask();
 		}
 
-		// TODO: 1. AddTask
+		public void AddTask()
+		{
+			Tasks.Add(new TaskItem() { TaskId = Guid.NewGuid(), Title = NewTaskTitle, Priority = NewTaskPriority });
+
+			ResetNewTask();
+		}
 
 		// TODO: 3. EditTask
 

@@ -49,7 +49,7 @@ namespace GettingDirty.Phone
 				//Application.Current.Host.Settings.EnableCacheVisualization = true;
 			}
 
-			// TODO: 2. InitializeContainer Call
+			InitializeContainer();
 
 			// Standard Silverlight initialization
 			InitializeComponent();
@@ -58,7 +58,16 @@ namespace GettingDirty.Phone
 			InitializePhoneApplication();
 		}
 
-		// TODO: 1. InitializeContainer
+		private void InitializeContainer()
+		{
+			var container = Ioc.Container;
+			container.Register<MainViewModel, MainViewModel>();
+			container.Register<DetailsViewModel, DetailsViewModel>();
+			container.Register<ITaskRepository, TaskRepository>();
+			container.Register<IIsolatedStorageRepository, IsolatedStorageRepository>();
+
+			container.RegisterInstance<IMessageBus>(new MessageBus());
+		}
 
 		// Code to execute when the application is launching (eg, from Start)
 		// This code will not execute when the application is reactivated

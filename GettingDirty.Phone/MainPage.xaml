@@ -90,6 +90,11 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
+		<DataTemplate x:Key="PriorityTemplate">
+			<Grid>
+				<Rectangle Fill="{Binding ., Converter={StaticResource PriorityToBrushConverter}}" Height="40" Stroke="Black" VerticalAlignment="Top" Width="40"/>
+			</Grid>
+		</DataTemplate>
 	</view:CorePhoneApplicationPage.Resources>
 
 	<view:CorePhoneApplicationPage.FontFamily>
@@ -127,7 +132,22 @@
 
 	<!--ContentPanel - place additional content here-->
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
 			<ListBox Margin="8" ItemsSource="{Binding Tasks}" ItemTemplate="{StaticResource TaskItemTemplate}" ItemContainerStyle="{StaticResource TaskItemContainerStyle}"/>
+			<Grid VerticalAlignment="Top" Grid.Row="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+				<TextBox x:Name="NewTaskTitle" TextWrapping="Wrap" Text="{Binding NewTaskTitle, Mode=TwoWay}" d:LayoutOverrides="Height"/>
+				<toolkit:ListPicker HorizontalAlignment="Left" Margin="0,0,0,14" Width="100" d:LayoutOverrides="Height" Grid.Column="1" ItemsSource="{Binding Priorities}" SelectedItem="{Binding NewTaskPriority, Mode=TwoWay}" ItemTemplate="{StaticResource PriorityTemplate}"/>
+				<Button x:Name="QuickAddTask" Content="+" HorizontalAlignment="Left" Margin="0,0,0,9" d:LayoutOverrides="Height" Grid.Column="2"/>
+				<mvvm:TriggerAction HorizontalAlignment="Left" Height="Auto" Width="100" TargetControl="{Binding ElementName=QuickAddTask}" MethodName="AddTask"/>
+			</Grid>
 		</Grid>
 	</Grid>
 
